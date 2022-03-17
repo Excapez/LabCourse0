@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "68626865809",
+    "firebase_url": "https://labcourse0-5422e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "labcourse0-5422e",
+    "storage_bucket": "labcourse0-5422e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68626865809:android:2e6680a301d1f959e56930",
+        "android_client_info": {
+          "package_name": "com.example.labcourse0"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "68626865809-hihs766sgpt8tghtjh8i71gbq22bjm8h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8lFs1O9bPWpF7RDvfNdUO72tWuszHC2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "68626865809-hihs766sgpt8tghtjh8i71gbq22bjm8h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
