@@ -90,13 +90,24 @@ public class MainActivity extends AppCompatActivity implements TodoDialog.TodoDi
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                Toast.makeText(MainActivity.this, snapshot.getKey(), Toast.LENGTH_SHORT).show();
+                for(Todo todo : todoList) {
+                    Log.d("snapshot key", todo.key);
+                    Log.d("snapshot key", snapshot.getKey());
+                    if(todo.key.equals(snapshot.getKey())) {
+                        Log.d("snapshot key", "found");
+                        todo.name = snapshot.getValue().toString();
+                        Toast.makeText(MainActivity.this, "changed name", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                }
+                myAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 for(Todo todo : todoList) {
-                    if(todo.key == snapshot.getKey()) {
+                    if(todo.key.equals(snapshot.getKey())) {
                         todoList.remove(todo);
                         break;
                     }
@@ -106,12 +117,12 @@ public class MainActivity extends AppCompatActivity implements TodoDialog.TodoDi
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                Log.d("snapshot", "onChildMoved");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d("snapshot", "onCancelled");
             }
         };
         todoRef.addChildEventListener(childEventListener);
