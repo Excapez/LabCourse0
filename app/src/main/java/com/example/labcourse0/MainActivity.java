@@ -90,14 +90,12 @@ public class MainActivity extends AppCompatActivity implements TodoDialog.TodoDi
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Toast.makeText(MainActivity.this, snapshot.getKey(), Toast.LENGTH_SHORT).show();
                 for(Todo todo : todoList) {
                     Log.d("snapshot key", todo.key);
                     Log.d("snapshot key", snapshot.getKey());
                     if(todo.key.equals(snapshot.getKey())) {
                         Log.d("snapshot key", "found");
                         todo.name = snapshot.getValue().toString();
-                        Toast.makeText(MainActivity.this, "changed name", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
