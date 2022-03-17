@@ -27,12 +27,12 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements TodoDialog.TodoDialogListener {
 
     RecyclerView recyclerView;
+    MyAdapter myAdapter;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference todoRef = database.getReference("todos");
     FloatingActionButton fab;
     ArrayList<Todo> todoList = new ArrayList<>();
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback;
-    MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,14 +95,12 @@ public class MainActivity extends AppCompatActivity implements TodoDialog.TodoDi
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                Log.d("snapshot", ""+todoList.size());
                 for(Todo todo : todoList) {
                     if(todo.key == snapshot.getKey()) {
                         todoList.remove(todo);
                         break;
                     }
                 }
-                Log.d("snapshot", ""+todoList.size());
                 myAdapter.notifyDataSetChanged();
             }
 
