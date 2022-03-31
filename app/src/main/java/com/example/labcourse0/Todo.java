@@ -1,11 +1,11 @@
 package com.example.labcourse0;
 
 public class Todo {
-    String name;
+    String description;
     String key;
 
     public Todo(String name, String key) {
-        this.name = name;
+        this.description = name;
         this.key = key;
     }
 }

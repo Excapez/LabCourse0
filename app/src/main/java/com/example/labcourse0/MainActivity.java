@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements TodoDialog.TodoDi
                     Log.d("snapshot key", snapshot.getKey());
                     if(todo.key.equals(snapshot.getKey())) {
                         Log.d("snapshot key", "found");
-                        todo.name = snapshot.getValue().toString();
+                        todo.description = snapshot.getValue().toString();
                         break;
                     }
                 }
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements TodoDialog.TodoDi
     }
 
     @Override
-    public void applyText(String todoName) {
-        todoRef.child(todoRef.push().getKey()).setValue(todoName);
+    public void applyText(String todoDescription) {
+        todoRef.child(todoRef.push().getKey()).setValue(todoDescription);
     }
 }

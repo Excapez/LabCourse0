@@ -32,7 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.todoText.setText(todoList.get(position).name);
+        holder.todoText.setText(todoList.get(position).description);
     }
 
     @Override
