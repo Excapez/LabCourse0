@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.NumberPicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,8 @@ import com.google.android.material.textfield.TextInputEditText;
 public class TodoDialog extends AppCompatDialogFragment {
     private TextInputEditText editTextTodo;
     private TodoDialogListener listener;
+    NumberPicker numberPicker;
+    Integer priority = 1;
 
     @NonNull
     @Override
@@ -25,6 +28,17 @@ public class TodoDialog extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_layout, null);
+
+        numberPicker = (NumberPicker) view.findViewById(R.id.numberPicker);
+        numberPicker.setMaxValue(3);
+        numberPicker.setMinValue(1);
+        numberPicker.setValue(1);
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
+                priority = newVal;
+            }
+        });
 
         builder.setView(view)
                 .setTitle("Insert Todo Name")
@@ -38,7 +52,7 @@ public class TodoDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String todoName = editTextTodo.getText().toString();
-                        listener.applyText(todoName);
+                        listener.applyText(todoName, priority);
                     }
                 });
         editTextTodo = view.findViewById(R.id.editTextTodo);
@@ -57,6 +71,6 @@ public class TodoDialog extends AppCompatDialogFragment {
     }
 
     public interface TodoDialogListener{
-        void applyText(String todoName);
+        void applyText(String todoName, Integer priority);
     }
 }

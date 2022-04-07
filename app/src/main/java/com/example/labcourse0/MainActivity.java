@@ -84,18 +84,32 @@ public class MainActivity extends AppCompatActivity implements TodoDialog.TodoDi
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                todoList.add(new Todo(snapshot.getValue().toString(), snapshot.getKey()));
+                /*for(DataSnapshot child : snapshot.getChildren())
+                {
+                    Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
+                    Log.d("snapshottest", child.getValue().toString());
+                }*/
+                Todo newTodo = snapshot.getValue(Todo.class);
+                Log.d("snapshottext", newTodo.description);
+                Log.d("snapshottext", ""+newTodo.priority);
+                newTodo.setKey(snapshot.getKey());
+                todoList.add(newTodo);
                 myAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+
+
                 for(Todo todo : todoList) {
                     Log.d("snapshot key", todo.key);
                     Log.d("snapshot key", snapshot.getKey());
                     if(todo.key.equals(snapshot.getKey())) {
                         Log.d("snapshot key", "found");
-                        todo.description = snapshot.getValue().toString();
+                        Todo changedTodo = snapshot.getValue(Todo.class);
+                        todo.description = changedTodo.getDescription();
+                        todo.priority = changedTodo.getPriority();
                         break;
                     }
                 }
@@ -132,7 +146,11 @@ public class MainActivity extends AppCompatActivity implements TodoDialog.TodoDi
     }
 
     @Override
-    public void applyText(String todoDescription) {
-        todoRef.child(todoRef.push().getKey()).setValue(todoDescription);
+    public void applyText(String todoDescription, Integer priority) {
+        Toast.makeText(this, ""+priority, Toast.LENGTH_SHORT).show();
+        String newKey = todoRef.push().getKey();
+        todoRef.child(newKey).child("description").setValue(todoDescription);
+        todoRef.child(newKey).child("priority").setValue(priority.toString());
+
     }
 }
